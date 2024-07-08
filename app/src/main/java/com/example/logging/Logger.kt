@@ -1,28 +1,19 @@
 package com.example.logging
 
-import android.util.Log
-
-interface ILogger {
-    fun logDebug(message: String)
-    fun logInfo(message: String)
-    fun logWarn(message: String)
-    fun logError(message: String)
-}
-
-object Logger: ILogger {
-    override fun logDebug(message: String) {
-        Log.d("Logger", message)
+open class Logger {
+    fun logDebug(message: String): String {
+        return "Debug Log: $message"
     }
 
-    override fun logInfo(message: String) {
-        Log.i("Logger", message)
+    fun logInfo(message: String): String {
+        return "Info Log: $message"
     }
 
-    override fun logWarn(message: String) {
-        Log.w("Logger", message)
+    fun logWarn(message: String): String {
+        return "Warn Log: $message"
     }
 
-    override fun logError(message: String) {
-        Log.e("Logger", message)
+    fun logError(message: String): String {
+        return "Error Log: $message"
     }
 }

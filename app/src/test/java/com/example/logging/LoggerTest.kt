@@ -1,57 +1,87 @@
 package com.example.logging
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
+import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
+
 
 class LoggerTest {
 
     @Mock
-    private lateinit var mockLogger: ILogger
-    private val testMessage = "Test message"
+    private lateinit var mockLogger: Logger
+
+    private lateinit var viewModel: MainViewModel
+
+    private lateinit var factory: MainViewModelFactory
 
     @BeforeEach
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
+        mockLogger = mock(Logger::class.java)
+        viewModel = MainViewModel(mockLogger)
+        factory = MainViewModelFactory(mockLogger)
+    }
+
+
+    @Test
+    fun `test create MainViewModel`() {
+        // Mock ViewModel class
+        val viewModelClass: Class<MainViewModel> = MainViewModel::class.java
+
+        // Create ViewModel using factory
+        val viewModel = factory.create(viewModelClass)
+
+        // Verify that ViewModel is created with the provided logger
+        verify(mockLogger).logDebug("Creating MainViewModel")
+
+        assert(viewModel is MainViewModel)
+    }
+
+
+    @Test
+    fun testLogDebug() {
+        val result: String = mockLogger.logDebug("This is a debug message")
+        Assertions.assertEquals("Debug Log: This is a debug message", result)
     }
 
     @Test
-    fun `test logDebug`() {
-        `when`(mockLogger.logDebug(testMessage)).then {
-        }
-
-        mockLogger.logDebug(testMessage)
-        verify(mockLogger).logDebug(testMessage)
+    fun testLogInfo() {
+        val result: String = mockLogger.logInfo("This is an info message")
+        Assertions.assertEquals("Info Log: This is an info message", result)
     }
 
     @Test
-    fun `test logInfo`() {
-        `when`(mockLogger.logInfo(testMessage)).then {
-        }
-
-        mockLogger.logInfo(testMessage)
-        verify(mockLogger).logInfo(testMessage)
+    fun testLogWarn() {
+        val result: String = mockLogger.logWarn("This is a warn message")
+        Assertions.assertEquals("Warn Log: This is a warn message", result)
     }
 
     @Test
-    fun `test logWarn`() {
-        `when`(mockLogger.logWarn(testMessage)).then {
-        }
-
-        mockLogger.logWarn(testMessage)
-        verify(mockLogger).logWarn(testMessage)
+    fun testLogError() {
+        val result: String = mockLogger.logError("This is an error message")
+        Assertions.assertEquals("Error Log: This is an error message", result)
     }
 
     @Test
-    fun `test logError`() {
-        `when`(mockLogger.logError(testMessage)).then {
-        }
+    fun testLogData() {
+        val className = "TestClassName"
+        viewModel.logData(className)
 
-        mockLogger.logError(testMessage)
-        verify(mockLogger).logError(testMessage)
+        Assertions.assertEquals("Debug Log: $className", viewModel.logsList[0])
+        Assertions.assertEquals("Info Log: $className", viewModel.logsList[1])
+        Assertions.assertEquals("Warn Log: $className", viewModel.logsList[2])
+        Assertions.assertEquals("Error Log: $className", viewModel.logsList[3])
 
+        viewModel.logsList.clear()
     }
+
 }

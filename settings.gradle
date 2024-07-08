@@ -11,13 +11,36 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+//dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+//    repositories {
+//        google()
+//        mavenCentral()
+//        maven { url 'https://jitpack.io' }
+//    }
+//}
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+//        maven { url 'https://jitpack.io' }
     }
 }
 
 rootProject.name = "Logging"
 include ':app'
+
+include ':logging_flutter'
+project(':logging_flutter').projectDir = new File(
+        settingsDir.parentFile,
+        'logging_flutter'
+)
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir.parentFile,
+        'logging_flutter/.android/include_flutter.groovy'
+))
