@@ -8,4 +8,8 @@ class AuthViewModel : ViewModel() {
     fun login(username: String, password: String): Boolean {
         return repository.login(username, password)
     }
+
+    fun signup(username: String, password: String): Boolean {
+        return repository.signup(username, password)
+    }
 }

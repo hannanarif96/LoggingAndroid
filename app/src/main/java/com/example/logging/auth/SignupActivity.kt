@@ -7,27 +7,27 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 
-class LoginActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
     private lateinit var viewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_signup)
 
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
         val usernameEditText = findViewById<EditText>(R.id.username)
         val passwordEditText = findViewById<EditText>(R.id.password)
-        val loginButton = findViewById<Button>(R.id.login_button)
+        val signupButton = findViewById<Button>(R.id.signup_button)
 
-        loginButton.setOnClickListener {
+        signupButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
-            val success = viewModel.login(username, password)
+            val success = viewModel.signup(username, password)
             if (success) {
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Signup Successful", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Signup Failed", Toast.LENGTH_SHORT).show()
             }
         }
     }
