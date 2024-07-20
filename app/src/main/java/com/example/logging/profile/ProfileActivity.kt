@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.logging.R
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var viewModel: ProfileViewModel
@@ -14,7 +15,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         val nameEditText = findViewById<EditText>(R.id.name)
         val emailEditText = findViewById<EditText>(R.id.email)

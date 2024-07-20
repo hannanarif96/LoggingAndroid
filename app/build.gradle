@@ -58,6 +58,7 @@ android {
         unitTests.all {
             useJUnitPlatform()
         }
+        unitTests.includeAndroidResources = true
     }
 }
 
@@ -77,4 +78,5 @@ dependencies {
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
     androidTestImplementation libs.mockito.android
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.11.2'
 }

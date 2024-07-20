@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.logging.R
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var viewModel: CategoryViewModel

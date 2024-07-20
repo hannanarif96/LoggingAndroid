@@ -1,13 +1,14 @@
 package com.example.logging
 
 import com.example.logging.auth.AuthViewModel
-import org.junit.Assert.*
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class AuthViewModelTest {
     private lateinit var viewModel: AuthViewModel
 
-    @Before
+    @BeforeEach
     fun setUp() {
         viewModel = AuthViewModel()
     }
@@ -15,26 +16,26 @@ class AuthViewModelTest {
     @Test
     fun loginSuccess() {
         val result = viewModel.login("user", "pass")
-        assertTrue(result)
+        Assertions.assertTrue(result)
     }
 
     @Test
     fun loginFailure() {
         val result = viewModel.login("user", "wrongpass")
-        assertFalse(result)
+        Assertions.assertFalse(result)
     }
 
     @Test
     fun signupSuccess() {
         val result = viewModel.signup("newuser", "newpass")
-        assertTrue(result)
+        Assertions.assertTrue(result)
     }
 
     @Test
     fun signupFailure() {
         viewModel.signup("user", "pass") // Existing user
         val result = viewModel.signup("user", "pass")
-        assertFalse(result)
+        Assertions.assertFalse(result)
     }
 }
 

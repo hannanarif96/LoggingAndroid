@@ -1,13 +1,15 @@
 package com.example.logging
 
-import org.junit.jupiter.api.Assert.*
-import org.junit.jupiter.api.Before
+import com.example.logging.profile.ProfileViewModel
+import com.example.logging.profile.User
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class ProfileViewModelTest {
     private lateinit var viewModel: ProfileViewModel
 
-    @Before
+    @BeforeEach
     fun setUp() {
         viewModel = ProfileViewModel()
     }

@@ -1,13 +1,15 @@
-package com.example.logging.task
+package com.example.logging
 
-import org.junit.Assert.*
-import org.junit.Before
+import com.example.logging.task.Task
+import com.example.logging.task.TaskViewModel
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class TaskViewModelTest {
     private lateinit var viewModel: TaskViewModel
 
-    @Before
+    @BeforeEach
     fun setUp() {
         viewModel = TaskViewModel()
     }
@@ -17,7 +19,7 @@ class TaskViewModelTest {
         val task = Task("Test Task")
         viewModel.addTask(task)
         val tasks = viewModel.getTasks()
-        assertTrue(tasks.contains(task))
+        Assertions.assertTrue(tasks.contains(task))
     }
 
     @Test
@@ -27,8 +29,8 @@ class TaskViewModelTest {
         viewModel.addTask(task1)
         viewModel.addTask(task2)
         val tasks = viewModel.getTasks()
-        assertEquals(2, tasks.size)
-        assertTrue(tasks.contains(task1))
-        assertTrue(tasks.contains(task2))
+        Assertions.assertEquals(2, tasks.size)
+        Assertions.assertTrue(tasks.contains(task1))
+        Assertions.assertTrue(tasks.contains(task2))
     }
 }
