@@ -1,10 +1,13 @@
 package com.example.logging
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.logging.databinding.ActivityMainBinding
-//import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.logData(className = localClassName)
 
         binding.btnOpenFlutter.setOnClickListener {
-//            startActivity(
-//                FlutterActivity.createDefaultIntent(this)
-//            )
+            startActivity(
+                Intent(this, MyFlutterActivity::class.java)
+            )
         }
     }
 

@@ -19,6 +19,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'http://download.flutter.io'
+            allowInsecureProtocol = true
+        }
 //        maven { url 'https://jitpack.io' }
     }
 }
@@ -26,14 +30,8 @@ dependencyResolutionManagement {
 rootProject.name = "Logging"
 include ':app'
 
-//include ':logging_flutter'
-//project(':logging_flutter').projectDir = new File(
-//        settingsDir.parentFile,
-//        'logging_flutter'
-//)
-//
-//setBinding(new Binding([gradle: this]))
-//evaluate(new File(
-//        settingsDir.parentFile,
-//        'logging_flutter/.android/include_flutter.groovy'
-//))
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir.parentFile,
+        'logging_flutter/.android/include_flutter.groovy'
+))
